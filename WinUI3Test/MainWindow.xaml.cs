@@ -7,7 +7,7 @@ namespace WinUI3Test;
 public sealed partial class MainWindow : Window
 {
     public ObservableCollection<string> oi = new();
-    string ok = "new";
+    string ok = "something new";
     public MainWindow()
     {
         InitializeComponent();
