@@ -1,32 +1,17 @@
 ﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Input;
-using System.Collections.ObjectModel;
 
 namespace WinUI3Test;
 
 public sealed partial class MainWindow : Window
 {
-    public ObservableCollection<string> oi = new();
-    string ok = "something new";
     public MainWindow()
     {
         InitializeComponent();
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void BtnOpenWindow_Click(object sender, RoutedEventArgs e)
     {
-        oi.Add("whatever");
-    }
-
-    private void showbutton_Click(object sender, RoutedEventArgs e)
-    {
-        if(addtolist is null)
-        {
-            navi.FindName("addtolist");
-        }
-        else
-        {
-            UnloadObject(addtolist);
-        }
+        BlankWindow1 blankWindow1 = new();
+        blankWindow1.Activate();
     }
 }
