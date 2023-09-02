@@ -32,6 +32,22 @@
                         </VisualState.Setters>
                         
                     </VisualState>
+
+                    <VisualState>
+
+                        <VisualState.StateTriggers>
+
+                            <AdaptiveTrigger MinWindowHeight="500"/>
+
+                        </VisualState.StateTriggers>
+
+                        <VisualState.Setters>
+
+                            <Setter Target="HeaderText.Foreground" Value="Red"/>
+
+                        </VisualState.Setters>
+                        
+                    </VisualState>
                     
                 </VisualStateGroup.States>
                 
@@ -47,7 +63,8 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
+        <TextBlock Foreground="AliceBlue" Grid.Row="0"
+                   x:Name="HeaderText"
                    Style="{StaticResource HeaderTextBlockStyle}"
                    Text="Page 2"/>
 
