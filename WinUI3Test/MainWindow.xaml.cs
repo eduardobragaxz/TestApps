@@ -1,4 +1,7 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using System.Collections.ObjectModel;
 
 namespace WinUI3Test;
 
@@ -9,9 +12,15 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void BtnOpenWindow_Click(object sender, RoutedEventArgs e)
+    private void MainNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
-        BlankWindow1 blankWindow1 = new();
-        blankWindow1.Activate();
+        if(Page1Button.IsSelected)
+        {
+            NavFrame.Navigate(typeof(BlankPage1));
+        }
+        else
+        {
+            NavFrame.Navigate(typeof(BlankPage2));
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace WinUI3Test
             m_window.Activate();
         }
 
-        private Window m_window;
+        public static Window MWindow { get => m_window; set => m_window = value; }
+        private static Window m_window;
     }
 }

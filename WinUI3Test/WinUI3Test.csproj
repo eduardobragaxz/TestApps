@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
 		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 		<RootNamespace>WinUI3Test</RootNamespace>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
@@ -10,13 +10,18 @@
 		<PublishProfile>win10-$(Platform).pubxml</PublishProfile>
 		<UseWinUI>true</UseWinUI>
 		<EnableMsixTooling>true</EnableMsixTooling>
-		<WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
-		<WindowsSdkPackageVersion>10.0.22621.27</WindowsSdkPackageVersion>
-		<PublishTrimmed>false</PublishTrimmed>
 		<SupportedOSPlatformVersion>10.0.22621.0</SupportedOSPlatformVersion>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="BlankWindow1.xaml" />
+	  <Content Remove="Assets\5118542973569706669_121.jpg" />
+	  <Content Remove="Assets\worst.mkv" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Assets\TextFile1.txt" />
+	  <None Remove="Assets\Texts\People.json" />
+	  <None Remove="BlankPage1.xaml" />
+	  <None Remove="BlankPage2.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -30,8 +35,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221209.1" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230822000" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
@@ -44,7 +49,12 @@
 		<ProjectCapability Include="Msix" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Page Update="BlankWindow1.xaml">
+	  <Page Update="BlankPage2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="BlankPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
@@ -57,4 +67,21 @@
 	<PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
 		<HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
 	</PropertyGroup>
+	
+	<Target Name="__BackCalculateOptimizationInputAssemblies" DependsOnTargets="__SnapshotResolvedFileToPublishBeforeOptimization;__SnapshotResolvedFileToPublishAfterOptimization" Returns="@(_OptimizationInputAssemblies)">
+		<PropertyGroup>
+			<IncludeDebugSymbolsProjectOutputGroup Condition="'$(IncludeDebugSymbolsProjectOutputGroup)' == ''">true</IncludeDebugSymbolsProjectOutputGroup>
+		</PropertyGroup>
+		<CallTarget Targets="DebugSymbolsProjectOutputGroup" Condition="'$(IncludeDebugSymbolsProjectOutputGroup)' == 'true'">
+			<Output TaskParameter="TargetOutputs" ItemName="_DebugSymbolsProjectOutputGroupOutput" />
+		</CallTarget>
+		<ItemGroup>
+			<_OptimizationInputAssemblies Include="@(_BeforeOptimizationImagesSnapshot)" />
+			<_OptimizationInputAssemblies Remove="@(_AfterOptimizationImagesSnapshot)" />
+			<_OutputGroupOutputs Include="@(_DebugSymbolsProjectOutputGroupOutput)" />
+			<_OutputGroupOutputsNotOptimized Include="@(_OutputGroupOutputs)" Exclude="@(_OptimizationInputAssemblies)" />
+			<_OutputGroupOutputsOptimized Include="@(_OutputGroupOutputs)" Exclude="@(_OutputGroupOutputsNotOptimized)" />
+			<_OptimizationInputAssemblies Include="@(_OutputGroupOutputsOptimized->'%(FinalOutputPath)')" />
+		</ItemGroup>
+	</Target>
 </Project>

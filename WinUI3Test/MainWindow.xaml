@@ -7,9 +7,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <NavigationView x:Name="MainNav"
+                    SelectionChanged="MainNav_SelectionChanged">
 
-        <Button Click="BtnOpenWindow_Click" Content="Open window" x:Name="BtnOpenWindow"/>
+        <NavigationView.Content>
 
-    </Grid>
+            <Frame x:Name="NavFrame"/>
+
+        </NavigationView.Content>
+
+        <NavigationView.MenuItems>
+
+            <NavigationViewItem Icon="Home"
+                                IsSelected="True"
+                                Content="Page 1"
+                                x:Name="Page1Button"/>
+
+            <NavigationViewItem Icon="Account"
+                                Content="Page 2"
+                                x:Name="Page2Button"/>
+
+        </NavigationView.MenuItems>
+        
+    </NavigationView>
+
 </Window>

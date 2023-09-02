@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUI3Test.BlankPage2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI3Test"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup>
+
+                <VisualStateGroup.States>
+
+                    <VisualState>
+
+                        <VisualState.StateTriggers>
+
+                            <AdaptiveTrigger MinWindowWidth="1000"/>
+
+                        </VisualState.StateTriggers>
+
+                        <VisualState.Setters>
+
+                            <Setter Target="Border1.(Grid.Row)" Value="2"/>
+                            <Setter Target="Border2.(Grid.Row)" Value="1"/>
+
+                        </VisualState.Setters>
+                        
+                    </VisualState>
+                    
+                </VisualStateGroup.States>
+                
+            </VisualStateGroup>
+            
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   Text="Page 2"/>
+
+        <Border Background="Black"
+                Grid.Row="1"
+                x:Name="Border1">
+
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
+                       Text="Border 1"/>
+
+        </Border>
+
+        <Border Background="AliceBlue"
+                Grid.Row="2"
+                x:Name="Border2">
+
+            <TextBlock Foreground="Black"
+                       Style="{StaticResource SubheaderTextBlockStyle}"
+                       Text="Border 2"/>
+
+        </Border>
+
+    </Grid>
+    
+</Page>
